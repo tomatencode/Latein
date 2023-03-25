@@ -1,5 +1,5 @@
 import json
-ausmahmen = {"esse":{"indikativ":{"aktiv":{"präsens":{"Sing":{"1.":"sum","2.":"es","3.":"est"},"Pl":{"1.":"sumus","2.":"estis","3.":"sunt"}},
+liste = {"esse":{"indikativ":{"aktiv":{"präsens":{"Sing":{"1.":"sum","2.":"es","3.":"est"},"Pl":{"1.":"sumus","2.":"estis","3.":"sunt"}},
                  "imperfekt":{"Sing":{"1.":"eram","2.":"eras","3.":"erat"},"Pl":{"1.":"eramus","2.":"eratis","3.":"erant"}},
                  "perfekt":{"Sing":{"1.":"fui","2.":"fuisti","3.":"fuit"},"Pl":{"1.":"fuimus","2.":"fuistis","3.":"fuerant"}},
                  "pluquamperfekt":{"Sing":{"1.":"fueram","2.":"fueras","3.":"fuerat"},"Pl":{"1.":"fueramus","2.":"fueratis","3.":"fuerant"}},
@@ -11,10 +11,10 @@ ausmahmen = {"esse":{"indikativ":{"aktiv":{"präsens":{"Sing":{"1.":"sum","2.":"
                  "pluquamperfekt":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
                  "futur":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":'"',"3.":""}},
                  "futur2":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}}}},
-                 "konjungtiv":{"aktiv":{"präsens":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
-                 "imperfekt":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
-                 "perfekt":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
-                 "pluquamperfekt":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
+                 "konjungtiv":{"aktiv":{"präsens":{"Sing":{"1.":"sim","2.":"sis","3.":"sit"},"Pl":{"1.":"simus","2.":"sitis","3.":"sint"}},
+                 "imperfekt":{"Sing":{"1.":"essem","2.":"esses","3.":"esset"},"Pl":{"1.":"essemus","2.":"essetis","3.":"essent"}},
+                 "perfekt":{"Sing":{"1.":"fuerim","2.":"fueris","3.":"fuerit"},"Pl":{"1.":"fuerimus","2.":"fueritis","3.":"fuerint"}},
+                 "pluquamperfekt":{"Sing":{"1.":"fuissem","2.":"fuisses","3.":"fuisset"},"Pl":{"1.":"fuissemus","2.":"fuissetis","3.":"fuissent"}},
                  "futur":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
                  "futur2":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}}},
                  "passiv":{"präsens":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
@@ -23,5 +23,5 @@ ausmahmen = {"esse":{"indikativ":{"aktiv":{"präsens":{"Sing":{"1.":"sum","2.":"
                  "pluquamperfekt":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
                  "futur":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}},
                  "futur2":{"Sing":{"1.":"","2.":"","3.":""},"Pl":{"1.":"","2.":"","3.":""}}}}}}
-json.dumps(ausmahmen)
+ausmahmen = json.dumps(liste)
 print(ausmahmen)
