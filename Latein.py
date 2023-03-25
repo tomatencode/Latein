@@ -35,10 +35,10 @@ def konjugieren(indikativ,aktiv,zeit,mänliche_form,wort : str):
 
         if aktiv:
             endungsart = "aktiv"
-        else:
-            endungsart = "passiv"
         if not indikativ:
             endungsart = "aktiv_m"
+        if not aktiv:
+            endungsart = "passiv"
         if zeit == "präsens" and not indikativ:
             grundform = grundform.rstrip("a")+"e"
         if zeit == "plusquamperfekt":
@@ -50,9 +50,9 @@ def konjugieren(indikativ,aktiv,zeit,mänliche_form,wort : str):
         if zeit == "futur2":
             grundform = grundform + "ver"
         if zeit == "imperfekt":
-            endungsart = "aktiv_m"
             if indikativ:
                 grundform = grundform + "ba"
+                endungsart = "aktiv_m"
             else:
                 grundform = grundform + "re"
         if zeit == "futur":
@@ -66,7 +66,7 @@ def konjugieren(indikativ,aktiv,zeit,mänliche_form,wort : str):
                 grundform = grundform + "v"
                 endungsart = "perfekt"
             else:
-                grundform = grundform + "vre"
+                grundform = grundform + "vri"
         
         endungen = {"aktiv":{"Sing":{"1.":"o","2.":"s","3.":"t"},"Pl":{"1.":"mus","2.":"tis","3.":"nt"}},
                     "aktiv_m":{"Sing":{"1.":"m","2.":"s","3.":"t"},"Pl":{"1.":"mus","2.":"tis","3.":"nt"}},
@@ -84,24 +84,23 @@ def konjugieren(indikativ,aktiv,zeit,mänliche_form,wort : str):
                         output.append(grundform+endungen[endungsart][SingPl][p])
 
     else:
-        grundform = wort.rstrip("re")
+        grundform = {"Mänlich":{"Sing":wort.rstrip("re")+"tus ","Pl":wort.rstrip("re")+"ti "},"Weiblich":{"Sing":wort.rstrip("are")+"a ","Pl":wort.rstrip("are")+"ae "}}
+
         if zeit == "perfekt":
-            esse = konjugieren(True,True,"präsens",True,"esse")
+            esse = konjugieren(indikativ,True,"präsens",True,"esse")
         if zeit == "plusquamperfekt":
-            esse = konjugieren(True,True,"imperfekt",True,"esse")
+            esse = konjugieren(indikativ,True,"imperfekt",True,"esse")
         if zeit == "futur2":
             esse = konjugieren(True,True,"futur",True,"esse")
         for SingPl in ["Sing","Pl"]:
             for p in ["1.","2.","3."]:
-                if SingPl == "Sing":
-                    output.append(grundform+"tus "+esse[int(p.rstrip("."))-1])
-                if SingPl == "Pl":
-                    output.append(grundform+"ti "+esse[int(p.rstrip("."))+2])
+                output.append(grundform[mänliche_form][SingPl]+esse[int(p.rstrip("."))-1])
+
 
             
     return output
     
 
-print(konjugieren(False,True,"plusquamperfekt",True,frage))
+print(konjugieren(True,False,"plusquamperfekt","Weiblich",frage))
 
 assert konjugieren(True,True,"präsens",True,"lauda") == ['laudo', 'laudas', 'laudat', 'laudamus', 'laudatis', 'laudant']
