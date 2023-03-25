@@ -3,7 +3,7 @@ voc = {"laudare":["loben","preisen","anpriesen","gutheißen","rühmen","a"]}
 
 
 #frage = input("Frage: ")
-frage = "esse"
+frage = "laudare"
 
 # open a file
 file1 = open("latein_ausnahmen.json", "r")
@@ -15,55 +15,46 @@ ausnahmen = json.loads(ausnahmen_str)
 def übersetzung():
     for i in range(0,len(voc[frage])-1):
         print(voc[frage][i])
-def konjugieren(indikativ,aktiv,zeit,SingPl_B,p_B,mänliche_form,wort : str):
+def konjugieren(indikativ_konjungtiv,aktiv_passiv,zeit,SingPl_B,p_B,mänliche_form,wort : str):
     output = []
     if wort in ausnahmen:
-        if indikativ:
-            indikativ_Konjungtiv = "indikativ"
-        else:
-            indikativ_Konjungtiv = "konjungtiv"
-        if aktiv:
-            aktiv_passiv = "aktiv"
-        else:
-            aktiv_passiv = "passiv"
-
         for SingPl in ["Sing","Pl"]:
             for p in ["1.","2.","3."]:
-                output.append(ausnahmen[wort][indikativ_Konjungtiv][aktiv_passiv][zeit][SingPl][p])
+                output.append(ausnahmen[wort][indikativ_konjungtiv][aktiv_passiv][zeit][SingPl][p])
     else:
-        if zeit == "präsens" or zeit == "imperfekt" or zeit == "perfekt" and aktiv or zeit == "futur" or zeit == "futur2" and aktiv or zeit == "plusquamperfekt" and aktiv:
+        if zeit == "präsens" or zeit == "imperfekt" or zeit == "perfekt" and aktiv_passiv == "aktiv" or zeit == "futur" or zeit == "futur2" and aktiv_passiv == "aktiv" or zeit == "plusquamperfekt" and aktiv_passiv == "aktiv":
             grundform = wort.rstrip("re")
 
-            if aktiv:
+            if aktiv_passiv == "aktiv":
                 endungsart = "aktiv"
-            if not indikativ:
+            if not indikativ_konjungtiv == "indikativ":
                 endungsart = "aktiv_m"
-            if not aktiv:
+            if aktiv_passiv == "passiv":
                 endungsart = "passiv"
-            if zeit == "präsens" and not indikativ:
+            if zeit == "präsens" and indikativ_konjungtiv == "konjungtiv":
                 grundform = grundform.rstrip("a")+"e"
             if zeit == "plusquamperfekt":
                 endungsart = "aktiv_m"
-                if indikativ:
+                if indikativ_konjungtiv == "indikativ":
                     grundform = grundform + "vera"
                 else:
                     grundform = grundform + "visse"
             if zeit == "futur2":
                 grundform = grundform + "ver"
             if zeit == "imperfekt":
-                if indikativ:
+                if indikativ_konjungtiv == "indikativ":
                     grundform = grundform + "ba"
                     endungsart = "aktiv_m"
                 else:
                     grundform = grundform + "re"
             if zeit == "futur":
                 grundform = grundform + "b"
-                if aktiv:
+                if aktiv_passiv == "aktiv":
                     endungsart = "futur"
                 else:
                     endungsart = "passiv_futur"
             if zeit == "perfekt":
-                if indikativ:
+                if indikativ_konjungtiv == "indikativ":
                     grundform = grundform + "v"
                     endungsart = "perfekt"
                 else:
@@ -85,14 +76,14 @@ def konjugieren(indikativ,aktiv,zeit,SingPl_B,p_B,mänliche_form,wort : str):
                             output.append(grundform+endungen[endungsart][SingPl][p])
 
         else:
-            grundform = {"Mänlich":{"-1":wort.rstrip("re")+"tus ","2":wort.rstrip("re")+"ti "},"Weiblich":{"-1":wort.rstrip("are")+"a ","2":wort.rstrip("are")+"ae "}}
+            grundform = {"mänlich":{"-1":wort.rstrip("re")+"tus ","2":wort.rstrip("re")+"ti "},"weiblich":{"-1":wort.rstrip("are")+"a ","2":wort.rstrip("are")+"ae "}}
 
             if zeit == "perfekt":
-                esse = konjugieren(indikativ,True,"präsens",True,"esse")
+                esse = konjugieren(indikativ_konjungtiv,"aktiv","präsens","mänlich","esse")
             if zeit == "plusquamperfekt":
-                esse = konjugieren(indikativ,True,"imperfekt",True,"esse")
+                esse = konjugieren(indikativ_konjungtiv,"aktiv","imperfekt","mänlich","esse")
             if zeit == "futur2":
-                esse = konjugieren(True,True,"futur",True,"esse")
+                esse = konjugieren("indikatv","aktiv","futur","mänlich","esse")
             for SingPl in [-1,2]:
                 for p in [1,2,3]:
                     output.append(grundform[mänliche_form][str(SingPl)]+esse[p+SingPl])
@@ -100,6 +91,6 @@ def konjugieren(indikativ,aktiv,zeit,SingPl_B,p_B,mänliche_form,wort : str):
     return output
     
 
-print(konjugieren(True,False,"plusquamperfekt","","","Weiblich",frage))
+print(konjugieren("indikativ","aktiv","präsens","","","mänlich",frage))
 
-assert konjugieren(True,True,"präsens",True,"lauda") == ['laudo', 'laudas', 'laudat', 'laudamus', 'laudatis', 'laudant']
+assert konjugieren("indikativ","aktiv","präsens","","","mänlich","lauda") == ['laudo', 'laudas', 'laudat', 'laudamus', 'laudatis', 'laudant']
