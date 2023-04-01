@@ -13,7 +13,7 @@ file1 = open("latein_ausnahmen.json", "r")
 ausnahmen_str = file1.read()
 ausnahmen = json.loads(ausnahmen_str)
 
-def dictionary_erstellen(indikativ_konjungtiv,aktiv_passiv,tempus,SingPl,person,Gennus):
+def dictionary_erstellen(indikativ_konjunktiv,aktiv_passiv,tempus,SingPl,person,Gennus):
     output = {}
         
     for i in indikativ_konjunktiv:
