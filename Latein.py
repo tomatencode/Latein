@@ -13,15 +13,15 @@ file1 = open("latein_ausnahmen.json", "r")
 ausnahmen_str = file1.read()
 ausnahmen = json.loads(ausnahmen_str)
 
-def dictionary_erstellen(indikativ_konjungtiv,aktiv_passiv,tempus,SingPl,person):
+def dictionary_erstellen(indikativ_konjunktiv,aktiv_passiv,tempus,SingPl,person):
     output = {}
-    item = [indikativ_konjungtiv,"indikativ","konjungtiv"],[aktiv_passiv,"aktiv","passiv"],[tempus,"plusquamperfekt","perfekt","imperfekt","präsens","futur","futur2"],[SingPl,"Sing","Pl"],[person,"1.","2.","3."]
+    item = [indikativ_konjunktiv,"indikativ","konjunktiv"],[aktiv_passiv,"aktiv","passiv"],[tempus,"plusquamperfekt","perfekt","imperfekt","präsens","futur","futur2"],[SingPl,"Sing","Pl"],[person,"1.","2.","3."]
     for j in range(0,5):
             if item[j][0] == []:
                 for i in range(1,len(item[j])):
                     item[j][0].append(item[j][i])
         
-    for i in indikativ_konjungtiv:
+    for i in indikativ_konjunktiv:
         output[i] = {}
         for a in aktiv_passiv:
             output[i][a] = {}
