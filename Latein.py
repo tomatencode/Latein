@@ -37,6 +37,8 @@ def übersetzung():
     for i in range(0,len(voc[frage])-1):
         print(voc[frage][i])
 
+# Kleine Änderung
+
 def konjugieren(indikativ_oder_konjungtiv,aktiv_oder_passiv,zeiten,SingPl,p,mänliche_form = "", wort : str = ""):
     output = dictionary_erstellen(indikativ_oder_konjungtiv,aktiv_oder_passiv,zeiten,SingPl,p)
     for indikativ_konjungtiv in indikativ_oder_konjungtiv:
