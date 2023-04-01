@@ -119,6 +119,5 @@ def konjugieren(indikativ_oder_konjungtiv,aktiv_oder_passiv,zeiten,SingPl,p,män
     
 
 print(konjugieren(["indikativ"],["aktiv"],["präsens"],[],[],["mänlich"],frage))
-print(konjugieren("indikativ","aktiv","präsens","","","mänlich",frage))
 
 assert konjugieren("indikativ","aktiv","präsens","","","mänlich","lauda") == ['laudo', 'laudas', 'laudat', 'laudamus', 'laudatis', 'laudant']
