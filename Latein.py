@@ -45,7 +45,7 @@ def zwischenfunktion(i : str,a : str,t : str,n : str,p : str,g : str,vocabel : s
     if vocabel in ausnahmen:
         return irregulaere_verben(i,a,t,n,p,vocabel)
     else:
-        funktionsliste = {"a_konjugtion":{'indikativ': {'aktiv': {'plusquamperfekt': "", 'perfekt': a_konj_ind_akt_perf(n,p,g,vocabel), 'imperfekt': a_konj_ind_akt_imperf(n,p,g,vocabel), 'präsens': a_konj_ind_akt_prä(n,p,g,vocabel), 'futur': "", 'futur2': ""},
+        funktionsliste = {"a_konjugtion":{'indikativ': {'aktiv': {'plusquamperfekt': a_konj_ind_akt_plus(n,p,g,vocabel), 'perfekt': a_konj_ind_akt_perf(n,p,g,vocabel), 'imperfekt': a_konj_ind_akt_imperf(n,p,g,vocabel), 'präsens': a_konj_ind_akt_prä(n,p,g,vocabel), 'futur': a_konj_ind_akt_fut(n,p,g,vocabel), 'futur2': a_konj_ind_akt_fut2(n,p,g,vocabel)},
                                                         'passiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""}},
                                          'konjungtiv': {'aktiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""},
                                                         'passiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""}}}}
@@ -55,6 +55,13 @@ def zwischenfunktion(i : str,a : str,t : str,n : str,p : str,g : str,vocabel : s
 def irregulaere_verben(i,a,t,n,p,Vocabel : str):
 
     return ausnahmen[Vocabel][i][a][t][n][p]
+
+
+def a_konj_ind_akt_plus(n : str,p : str,g : str,vocabel : str):
+    endungen = {"Sing":{"1.":"veram","2.":"veras","3.":"verat"},
+                "Pl":{"1.":"veramus","2.":"veratis","3.":"verant"}}
+    grundform = vocabel.rstrip("re")
+    return grundform + endungen[n][p]
 
 def a_konj_ind_akt_perf(n : str,p : str,g : str,vocabel : str):
     endungen = {"Sing":{"1.":"vi","2.":"visti","3.":"vit"},
@@ -75,10 +82,23 @@ def a_konj_ind_akt_prä(n : str,p : str,g : str,vocabel : str):
     grundform = vocabel.rstrip("are")
     return grundform + endungen[n][p]
 
+def a_konj_ind_akt_fut(n : str,p : str,g : str,vocabel : str):
+    endungen = {"Sing":{"1.":"bo","2.":"bis","3.":"bit"},
+                "Pl":{"1.":"bimus","2.":"bitis","3.":"bunt"}}
+    grundform = vocabel.rstrip("re")
+    return grundform + endungen[n][p]
+
+def a_konj_ind_akt_fut2(n : str,p : str,g : str,vocabel : str):
+    endungen = {"Sing":{"1.":"vero","2.":"veris","3.":"verit"},
+                "Pl":{"1.":"verimus","2.":"veritis","3.":"verint"}}
+    grundform = vocabel.rstrip("re")
+    return grundform + endungen[n][p]
 
 
 
-print(konjugieren(["indikativ"],["aktiv"],["präsens","imperfekt","perfekt"],[],[],["mänlich"],frage))
+
+
+print(konjugieren(["indikativ"],["aktiv"],[],[],[],["mänlich"],frage))
 
 
 
