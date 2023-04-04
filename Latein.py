@@ -58,21 +58,21 @@ def irregulaere_verben(i,a,t,n,p,Vocabel : str):
 
 
 def a_konj_ind_akt_plus(n : str,p : str,g : str,vocabel : str):
-    endungen = {"Sing":{"1.":"veram","2.":"veras","3.":"verat"},
-                "Pl":{"1.":"veramus","2.":"veratis","3.":"verant"}}
-    grundform = vocabel.rstrip("re")
+    endungen = {"Sing":{"1.":"m","2.":"s","3.":"t"},
+                "Pl":{"1.":"mus","2.":"tis","3.":"nt"}}
+    grundform = vocabel.rstrip("re")+ "vera"
     return grundform + endungen[n][p]
 
 def a_konj_ind_akt_perf(n : str,p : str,g : str,vocabel : str):
-    endungen = {"Sing":{"1.":"vi","2.":"visti","3.":"vit"},
-                "Pl":{"1.":"vimus","2.":"vistis","3.":"verunt"}}
-    grundform = vocabel.rstrip("re")
+    endungen = {"Sing":{"1.":"i","2.":"isti","3.":"it"},
+                "Pl":{"1.":"imus","2.":"istis","3.":"erunt"}}
+    grundform = vocabel.rstrip("re")+"v"
     return grundform + endungen[n][p]
 
 def a_konj_ind_akt_imperf(n : str,p : str,g : str,vocabel : str):
-    endungen = {"Sing":{"1.":"bam","2.":"bas","3.":"bat"},
-                "Pl":{"1.":"bamus","2.":"batis","3.":"bant"}}
-    grundform = vocabel.rstrip("re")
+    endungen = {"Sing":{"1.":"m","2.":"s","3.":"t"},
+                "Pl":{"1.":"mus","2.":"tis","3.":"nt"}}
+    grundform = vocabel.rstrip("re") + "ba"
     return grundform + endungen[n][p]
 
 
@@ -83,15 +83,15 @@ def a_konj_ind_akt_prä(n : str,p : str,g : str,vocabel : str):
     return grundform + endungen[n][p]
 
 def a_konj_ind_akt_fut(n : str,p : str,g : str,vocabel : str):
-    endungen = {"Sing":{"1.":"bo","2.":"bis","3.":"bit"},
-                "Pl":{"1.":"bimus","2.":"bitis","3.":"bunt"}}
-    grundform = vocabel.rstrip("re")
+    endungen = {"Sing":{"1.":"o","2.":"is","3.":"it"},
+                "Pl":{"1.":"imus","2.":"itis","3.":"unt"}}
+    grundform = vocabel.rstrip("re") + "b"
     return grundform + endungen[n][p]
 
 def a_konj_ind_akt_fut2(n : str,p : str,g : str,vocabel : str):
-    endungen = {"Sing":{"1.":"vero","2.":"veris","3.":"verit"},
-                "Pl":{"1.":"verimus","2.":"veritis","3.":"verint"}}
-    grundform = vocabel.rstrip("re")
+    endungen = {"Sing":{"1.":"o","2.":"is","3.":"it"},
+                "Pl":{"1.":"imus","2.":"itis","3.":"int"}}
+    grundform = vocabel.rstrip("re")+ "ver"
     return grundform + endungen[n][p]
 
 
@@ -105,3 +105,4 @@ print(konjugieren(["indikativ"],["aktiv"],[],[],[],["mänlich"],frage))
 ### Tests ###
 
 assert konjugieren([],[],[],[],[],[],"esse") == {'indikativ': {'aktiv': {'plusquamperfekt': {'mänlich': {'Sing': {'1.': 'fueram', '2.': 'fueras', '3.': 'fuerat'}, 'Pl': {'1.': 'fueramus', '2.': 'fueratis', '3.': 'fuerant'}}, 'weiblich': {'Sing': {'1.': 'fueram', '2.': 'fueras', '3.': 'fuerat'}, 'Pl': {'1.': 'fueramus', '2.': 'fueratis', '3.': 'fuerant'}}}, 'perfekt': {'mänlich': {'Sing': {'1.': 'fui', '2.': 'fuisti', '3.': 'fuit'}, 'Pl': {'1.': 'fuimus', '2.': 'fuistis', '3.': 'fuerant'}}, 'weiblich': {'Sing': {'1.': 'fui', '2.': 'fuisti', '3.': 'fuit'}, 'Pl': {'1.': 'fuimus', '2.': 'fuistis', '3.': 'fuerant'}}}, 'imperfekt': {'mänlich': {'Sing': {'1.': 'eram', '2.': 'eras', '3.': 'erat'}, 'Pl': {'1.': 'eramus', '2.': 'eratis', '3.': 'erant'}}, 'weiblich': {'Sing': {'1.': 'eram', '2.': 'eras', '3.': 'erat'}, 'Pl': {'1.': 'eramus', '2.': 'eratis', '3.': 'erant'}}}, 'präsens': {'mänlich': {'Sing': {'1.': 'sum', '2.': 'es', '3.': 'est'}, 'Pl': {'1.': 'sumus', '2.': 'estis', '3.': 'sunt'}}, 'weiblich': {'Sing': {'1.': 'sum', '2.': 'es', '3.': 'est'}, 'Pl': {'1.': 'sumus', '2.': 'estis', '3.': 'sunt'}}}, 'futur': {'mänlich': {'Sing': {'1.': 'ero', '2.': 'eris', '3.': 'erit'}, 'Pl': {'1.': 'erimus', '2.': 'eritis', '3.': 'erunt'}}, 'weiblich': {'Sing': {'1.': 'ero', '2.': 'eris', '3.': 'erit'}, 'Pl': {'1.': 'erimus', '2.': 'eritis', '3.': 'erunt'}}}, 'futur2': {'mänlich': {'Sing': {'1.': 'fuero', '2.': 'fueris', '3.': 'fuerit'}, 'Pl': {'1.': 'fuerimus', '2.': 'fueritis', '3.': 'fuerint'}}, 'weiblich': {'Sing': {'1.': 'fuero', '2.': 'fueris', '3.': 'fuerit'}, 'Pl': {'1.': 'fuerimus', '2.': 'fueritis', '3.': 'fuerint'}}}}, 'passiv': {'plusquamperfekt': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'perfekt': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'imperfekt': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'präsens': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'futur': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '"', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '"', '3.': ''}}}, 'futur2': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}}}, 'konjungtiv': {'aktiv': {'plusquamperfekt': {'mänlich': {'Sing': {'1.': 'fuissem', '2.': 'fuisses', '3.': 'fuisset'}, 'Pl': {'1.': 'fuissemus', '2.': 'fuissetis', '3.': 'fuissent'}}, 'weiblich': {'Sing': {'1.': 'fuissem', '2.': 'fuisses', '3.': 'fuisset'}, 'Pl': {'1.': 'fuissemus', '2.': 'fuissetis', '3.': 'fuissent'}}}, 'perfekt': {'mänlich': {'Sing': {'1.': 'fuerim', '2.': 'fueris', '3.': 'fuerit'}, 'Pl': {'1.': 'fuerimus', '2.': 'fueritis', '3.': 'fuerint'}}, 'weiblich': {'Sing': {'1.': 'fuerim', '2.': 'fueris', '3.': 'fuerit'}, 'Pl': {'1.': 'fuerimus', '2.': 'fueritis', '3.': 'fuerint'}}}, 'imperfekt': {'mänlich': {'Sing': {'1.': 'essem', '2.': 'esses', '3.': 'esset'}, 'Pl': {'1.': 'essemus', '2.': 'essetis', '3.': 'essent'}}, 'weiblich': {'Sing': {'1.': 'essem', '2.': 'esses', '3.': 'esset'}, 'Pl': {'1.': 'essemus', '2.': 'essetis', '3.': 'essent'}}}, 'präsens': {'mänlich': {'Sing': {'1.': 'sim', '2.': 'sis', '3.': 'sit'}, 'Pl': {'1.': 'simus', '2.': 'sitis', '3.': 'sint'}}, 'weiblich': {'Sing': {'1.': 'sim', '2.': 'sis', '3.': 'sit'}, 'Pl': {'1.': 'simus', '2.': 'sitis', '3.': 'sint'}}}, 'futur': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'futur2': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}}, 'passiv': {'plusquamperfekt': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'perfekt': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'imperfekt': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'präsens': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'futur': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}, 'futur2': {'mänlich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}, 'weiblich': {'Sing': {'1.': '', '2.': '', '3.': ''}, 'Pl': {'1.': '', '2.': '', '3.': ''}}}}}}
+assert konjugieren(["indikativ"],["aktiv"],[],[],[],["mänlich"],"lobare") == {'indikativ': {'aktiv': {'plusquamperfekt': {'mänlich': {'Sing': {'1.': 'lobaveram', '2.': 'lobaveras', '3.': 'lobaverat'}, 'Pl': {'1.': 'lobaveramus', '2.': 'lobaveratis', '3.': 'lobaverant'}}}, 'perfekt': {'mänlich': {'Sing': {'1.': 'lobavi', '2.': 'lobavisti', '3.': 'lobavit'}, 'Pl': {'1.': 'lobavimus', '2.': 'lobavistis', '3.': 'lobaverunt'}}}, 'imperfekt': {'mänlich': {'Sing': {'1.': 'lobabam', '2.': 'lobabas', '3.': 'lobabat'}, 'Pl': {'1.': 'lobabamus', '2.': 'lobabatis', '3.': 'lobabant'}}}, 'präsens': {'mänlich': {'Sing': {'1.': 'lobo', '2.': 'lobas', '3.': 'lobat'}, 'Pl': {'1.': 'lobamus', '2.': 'lobatis', '3.': 'lobant'}}}, 'futur': {'mänlich': {'Sing': {'1.': 'lobabo', '2.': 'lobabis', '3.': 'lobabit'}, 'Pl': {'1.': 'lobabimus', '2.': 'lobabitis', '3.': 'lobabunt'}}}, 'futur2': {'mänlich': {'Sing': {'1.': 'lobavero', '2.': 'lobaveris', '3.': 'lobaverit'}, 'Pl': {'1.': 'lobaverimus', '2.': 'lobaveritis', '3.': 'lobaverint'}}}}}}
