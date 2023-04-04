@@ -2,9 +2,8 @@ import json
 
 voc = {"laudare":["loben","preisen","anpriesen","gutheißen","rühmen","a"]}
 
-
 #frage = input("Frage: ")
-frage = "esse"
+frage = "lobare"
 
 # open a file
 file1 = open("latein_ausnahmen.json", "r")
@@ -42,30 +41,44 @@ def konjugieren(indikativ_konjunktiv : str,aktiv_passiv : str,tempus : str,numer
                             output[i][a][t][g][n][p] = zwischenfunktion(i,a,t,n,p,g,vocabel)
     return output
 
-def zwischenfunktion(indikativ_konjunktiv : str,aktiv_passiv : str,tempus : str,numerus : str,person : str,Genus : str,vocabel : str):
+def zwischenfunktion(i : str,a : str,t : str,n : str,p : str,g : str,vocabel : str):
     if vocabel in ausnahmen:
-        return irregulaere_verben(indikativ_konjunktiv,aktiv_passiv,tempus,numerus,person,vocabel)
+        return irregulaere_verben(i,a,t,n,p,vocabel)
+    else:
+        funktionsliste = {"a_konjugtion":{'indikativ': {'aktiv': {'plusquamperfekt': "", 'perfekt': a_konj_ind_akt_perf(n,p,g,vocabel), 'imperfekt': a_konj_ind_akt_imperf(n,p,g,vocabel), 'präsens': a_konj_ind_akt_prä(n,p,g,vocabel), 'futur': "", 'futur2': ""},
+                                                        'passiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""}},
+                                         'konjungtiv': {'aktiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""},
+                                                        'passiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""}}}}
+        return funktionsliste['a_konjugtion'][i][a][t]
 
 
 def irregulaere_verben(i,a,t,n,p,Vocabel : str):
+
     return ausnahmen[Vocabel][i][a][t][n][p]
 
-def a_konj_ind_akt_prä(n,p,g,Vocabel : str):
-    endungen = {"Sing":{"1.":"o","2.":"as","3.":"at"},
-                "Pl":{"1.":"amus","2.":"atis","3.":"ant"}}
-    grundform = Vocabel.rstrip("are")
+def a_konj_ind_akt_perf(n : str,p : str,g : str,vocabel : str):
+    endungen = {"Sing":{"1.":"vi","2.":"visti","3.":"vit"},
+                "Pl":{"1.":"vimus","2.":"vistis","3.":"verunt"}}
+    grundform = vocabel.rstrip("re")
     return grundform + endungen[n][p]
 
-def a_konj_ind_akt_imperf(n,p,g,Vocabel):
+def a_konj_ind_akt_imperf(n : str,p : str,g : str,vocabel : str):
     endungen = {"Sing":{"1.":"bam","2.":"bas","3.":"bat"},
                 "Pl":{"1.":"bamus","2.":"batis","3.":"bant"}}
-    grundform = Vocabel.rstrip("re")
+    grundform = vocabel.rstrip("re")
     return grundform + endungen[n][p]
 
-    
+
+def a_konj_ind_akt_prä(n : str,p : str,g : str,vocabel : str):
+    endungen = {"Sing":{"1.":"o","2.":"as","3.":"at"},
+                "Pl":{"1.":"amus","2.":"atis","3.":"ant"}}
+    grundform = vocabel.rstrip("are")
+    return grundform + endungen[n][p]
 
 
-print(konjugieren([],[],[],[],[],[],frage))
+
+
+print(konjugieren(["indikativ"],["aktiv"],["präsens","imperfekt","perfekt"],[],[],["mänlich"],frage))
 
 
 
