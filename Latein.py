@@ -47,7 +47,7 @@ def zwischenfunktion(i : str,a : str,t : str,n : str,p : str,g : str,vocabel : s
     else:
         funktionsliste = {"a_konjugtion":{'indikativ': {'aktiv': {'plusquamperfekt': a_konj_ind_akt_plus(n,p,g,vocabel), 'perfekt': a_konj_ind_akt_perf(n,p,g,vocabel), 'imperfekt': a_konj_ind_akt_imperf(n,p,g,vocabel), 'präsens': a_konj_ind_akt_prä(n,p,g,vocabel), 'futur': a_konj_ind_akt_fut(n,p,g,vocabel), 'futur2': a_konj_ind_akt_fut2(n,p,g,vocabel)},
                                                         'passiv': {'plusquamperfekt': a_konj_ind_pas_plus(n,p,g,vocabel), 'perfekt': a_konj_ind_pas_perf(n,p,g,vocabel), 'imperfekt': a_konj_ind_pas_imperf(n,p,g,vocabel), 'präsens': a_konj_ind_pas_prä(n,p,g,vocabel), 'futur': a_konj_ind_pas_fut(n,p,g,vocabel), 'futur2': a_konj_ind_pas_fut2(n,p,g,vocabel)}},
-                                         'konjungtiv': {'aktiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""},
+                                         'konjungtiv': {'aktiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': a_konj_konj_akt_prä(n,p,g,vocabel), 'futur': "", 'futur2': ""},
                                                         'passiv': {'plusquamperfekt': "", 'perfekt': "", 'imperfekt': "", 'präsens': "", 'futur': "", 'futur2': ""}}}}
         return funktionsliste['a_konjugtion'][i][a][t]
 
@@ -140,9 +140,17 @@ def a_konj_ind_pas_fut2(n : str,p : str,g : str,vocabel : str):
     grundform = vocabel.rstrip("re")
     return grundform  + sonderzeichen[g][n] + konjugieren(["indikativ"],["aktiv"],["futur"],[n],[p],["mänlich"],"esse")["indikativ"]["aktiv"]["futur"]["mänlich"][n][p]
 
+### a-konjugation konjungtiv aktiv ###
+
+def a_konj_konj_akt_prä(n : str,p : str,g : str,vocabel : str):
+    endungen = {"Sing":{"1.":"m","2.":"s","3.":"t"},
+                "Pl":{"1.":"mus","2.":"tis","3.":"nt"}}
+    tempuszeichen = "e"
+    grundform = vocabel.rstrip("are")
+    return grundform + tempuszeichen + endungen[n][p]
 
 
-print(konjugieren(["indikativ"],[],[],[],[],[],frage))
+print(konjugieren(["konjungtiv"],["aktiv"],["präsens"],[],[],[],frage))
 
 
 
