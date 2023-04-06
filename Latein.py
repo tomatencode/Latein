@@ -1,4 +1,5 @@
 import json
+from typing import List
 
 voc = {"laudare":["loben","preisen","anpriesen","gutheißen","rühmen","a"]}
 
@@ -18,34 +19,38 @@ def übersetzung():
         print(voc[frage][i])
 
 
-def konjugieren(indikativ_konjunktiv : str,aktiv_passiv : str,tempus : str,numerus : str,person : str,Genus : str,vocabel : str):
+def konjugieren(indikativ_konjunktiv : List[str],gennus_verbi : List[str],tempi : List[str],numeri : List[str],personen : List[str],geni : List[str],vocabel : List[str]):
+    # aktiv passiv fachwort https://www.google.com/search?channel=fs&client=ubuntu-sn&q=aktiv+passiv+fachwort
 
-    item = [indikativ_konjunktiv,"indikativ","konjungtiv"],[aktiv_passiv,"aktiv","passiv"],
-    [tempus,"plusquamperfekt","perfekt","imperfekt","präsens","futur","futur2"],[numerus,"sing","pl"],[person,"1.","2.","3."],[Genus,"mänlich","weiblich"]
+    item = [indikativ_konjunktiv,"indikativ","konjungtiv"],[gennus_verbi,"aktiv","passiv"],[tempi,"plusquamperfekt","perfekt","imperfekt","präsens","futur","futur2"],[numeri,"sing","pl"],[personen,"1.","2.","3."],[geni,"mänlich","weiblich"]
 
+    # replaces empty lists with default values
     for j in range(0,item.__len__()):
             if item[j][0] == []:
                 for i in range(1,len(item[j])):
                     item[j][0].append(item[j][i])
     
     output = {}
-        
+    # to do: variablen umbennen
     for i in indikativ_konjunktiv:
         output[i] = {}
-        for a in aktiv_passiv:
+        for a in gennus_verbi:
             output[i][a] = {}
-            for t in tempus:
+            for t in tempi:
                 output[i][a][t] = {}
-                for g in Genus:
+                for g in geni:
                     output[i][a][t][g] = {}
-                    for n in numerus:
+                    for n in numeri:
                         output[i][a][t][g][n] = {}
-                        for p in person:
+                        for p in personen:
                             output[i][a][t][g][n][p] = zwischenfunktion(i,a,t,n,p,g,vocabel)
 
     return output
 
 def zwischenfunktion(i : str,a : str,t : str,n : str,p : str,g : str,vocabel : str):
+    """
+    igentwas
+    """
     if vocabel in ausnahmen:
         return irregulaere_verben(i,a,t,n,p,vocabel)
     
@@ -62,42 +67,42 @@ def irregulaere_verben(i,a,t,n,p,Vocabel : str):
     return ausnahmen[Vocabel][i][a][t][n][p]
 
 # a-konjugation indikativ aktiv
-def a_konj_ind_akt_prä(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_akt_prä(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"o","2.":"as","3.":"at"},
                 "pl":{"1.":"amus","2.":"atis","3.":"ant"}}
     tempuszeichen = ""
     grundform = vocabel.rstrip("are")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_ind_akt_imperf(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_akt_imperf(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"m","2.":"s","3.":"t"},
                 "pl":{"1.":"mus","2.":"tis","3.":"nt"}}
     tempuszeichen = "ba"
     grundform = vocabel.rstrip("re")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_ind_akt_perf(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_akt_perf(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"i","2.":"isti","3.":"it"},
                 "pl":{"1.":"imus","2.":"istis","3.":"erunt"}}
     tempuszeichen = "v"
     grundform = vocabel.rstrip("re")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_ind_akt_plus(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_akt_plus(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"m","2.":"s","3.":"t"},
                 "pl":{"1.":"mus","2.":"tis","3.":"nt"}}
     tempuszeichen = "vera"
     grundform = vocabel.rstrip("re")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_ind_akt_fut(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_akt_fut(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"o","2.":"is","3.":"it"},
                 "pl":{"1.":"imus","2.":"itis","3.":"unt"}}
     tempuszeichen = "b"
     grundform = vocabel.rstrip("re")
     return grundform  + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_ind_akt_fut2(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_akt_fut2(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"o","2.":"is","3.":"it"},
                 "pl":{"1.":"imus","2.":"itis","3.":"int"}}
     tempuszeichen = "ver"
@@ -105,7 +110,7 @@ def a_konj_ind_akt_fut2(n : str,p : str,g : str,vocabel : str):
     return grundform  + tempuszeichen + endungen_dict[n][p]
 
 # a-konjugation indikativ passiv
-def a_konj_ind_pas_prä(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_pas_prä(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"or","2.":"aris","3.":"atur"},
                 "pl":{"1.":"amur","2.":"amini","3.":"antur"}}
     tempuszeichen = ""
@@ -113,14 +118,14 @@ def a_konj_ind_pas_prä(n : str,p : str,g : str,vocabel : str):
     return grundform  + tempuszeichen + endungen_dict[n][p]
 
 
-def a_konj_ind_pas_imperf(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_pas_imperf(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"r","2.":"ris","3.":"tur"},
                 "pl":{"1.":"mur","2.":"mini","3.":"ntur"}}
     tempuszeichen = "ba"
     grundform = vocabel.rstrip("re")
     return grundform  + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_ind_pas_fut(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_pas_fut(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"or","2.":"eris","3.":"itur"},
                 "pl":{"1.":"imur","2.":"imini","3.":"untur"}}
     tempuszeichen = "b"
@@ -128,21 +133,21 @@ def a_konj_ind_pas_fut(n : str,p : str,g : str,vocabel : str):
     return grundform  + tempuszeichen + endungen_dict[n][p]
 
 
-def a_konj_ind_pas_perf(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_pas_perf(n : str,p : str,g : str,vocabel : str)->str:
     sonderzeichen_dict = {"mänlich":{"sing":"tus ","pl":"ti "},
                           "weiblich":{"sing":"ta ","pl":"tae "}}
     grundform = vocabel.rstrip("re")
     esse_form_str = konjugieren(["indikativ"],["aktiv"],["präsens"],[n],[p],["mänlich"],"esse") ["indikativ"]["aktiv"]["präsens"]["mänlich"][n][p]
     return grundform  + sonderzeichen_dict[g][n] + esse_form_str
 
-def a_konj_ind_pas_plus(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_pas_plus(n : str,p : str,g : str,vocabel : str)->str:
     sonderzeichen_dict = {"mänlich":{"sing":"tus ","pl":"ti "},
                           "weiblich":{"sing":"ta ","pl":"tae "}}
     grundform = vocabel.rstrip("re")
     esse_form_str = konjugieren(["indikativ"],["aktiv"],["imperfekt"],[n],[p],["mänlich"],"esse") ["indikativ"]["aktiv"]["imperfekt"]["mänlich"][n][p]
     return grundform  + sonderzeichen_dict[g][n] + esse_form_str
 
-def a_konj_ind_pas_fut2(n : str,p : str,g : str,vocabel : str):
+def a_konj_ind_pas_fut2(n : str,p : str,g : str,vocabel : str)->str:
     sonderzeichen_dict = {"mänlich":{"sing":"tus ","pl":"ti "},
                           "weiblich":{"sing":"ta ","pl":"tae "}}
     grundform = vocabel.rstrip("re")
@@ -150,28 +155,28 @@ def a_konj_ind_pas_fut2(n : str,p : str,g : str,vocabel : str):
     return grundform  + sonderzeichen_dict[g][n] + esse_form_str
 
 # a-konjugation konjungtiv aktiv
-def a_konj_konj_akt_prä(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_akt_prä(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"m","2.":"s","3.":"t"},
                 "pl":{"1.":"mus","2.":"tis","3.":"nt"}}
     tempuszeichen = "e"
     grundform = vocabel.rstrip("are")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_konj_akt_imperf(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_akt_imperf(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"m","2.":"s","3.":"t"},
                 "pl":{"1.":"mus","2.":"tis","3.":"nt"}}
     tempuszeichen = ""
     grundform = vocabel.rstrip("")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_konj_akt_perf(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_akt_perf(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"m","2.":"s","3.":"t"},
                 "pl":{"1.":"mus","2.":"tis","3.":"nt"}}
     tempuszeichen = "veri"
     grundform = vocabel.rstrip("re")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_konj_akt_plus(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_akt_plus(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"m","2.":"s","3.":"t"},
                 "pl":{"1.":"mus","2.":"tis","3.":"nt"}}
     tempuszeichen = "visse"
@@ -179,33 +184,33 @@ def a_konj_konj_akt_plus(n : str,p : str,g : str,vocabel : str):
     return grundform + tempuszeichen + endungen_dict[n][p]
 
 # a-konjugation konjungtiv passiv
-def a_konj_konj_pas_prä(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_pas_prä(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"r","2.":"ris","3.":"tur"},
                 "pl":{"1.":"mur","2.":"mini","3.":"ntur"}}
     tempuszeichen = "e"
     grundform = vocabel.rstrip("are")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_konj_pas_imperf(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_pas_imperf(n : str,p : str,g : str,vocabel : str)->str:
     endungen_dict = {"sing":{"1.":"r","2.":"ris","3.":"tur"},
                 "pl":{"1.":"mur","2.":"mini","3.":"ntur"}}
     tempuszeichen = ""
     grundform = vocabel.rstrip("")
     return grundform + tempuszeichen + endungen_dict[n][p]
 
-def a_konj_konj_pas_perf(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_pas_perf(n : str,p : str,g : str,vocabel : str)->str:
     sonderzeichen_dict = {"mänlich":{"sing":"tus ","pl":"ti "},"weiblich":{"sing":"ta ","pl":"tae "}}
     grundform = vocabel.rstrip("re")
     esse_form_str = konjugieren(["konjungtiv"],["aktiv"],["präsens"],[n],[p],["mänlich"],"esse") ["konjungtiv"]["aktiv"]["präsens"]["mänlich"][n][p]
     return grundform  + sonderzeichen_dict[g][n] + esse_form_str
 
-def a_konj_konj_pas_plus(n : str,p : str,g : str,vocabel : str):
+def a_konj_konj_pas_plus(n : str,p : str,g : str,vocabel : str)->str:
     sonderzeichen_dict = {"mänlich":{"sing":"tus ","pl":"ti "},"weiblich":{"sing":"ta ","pl":"tae "}}
     grundform = vocabel.rstrip("re")
     esse_form_str = konjugieren(["konjungtiv"],["aktiv"],["imperfekt"],[n],[p],["mänlich"],"esse") ["konjungtiv"]["aktiv"]["imperfekt"]["mänlich"][n][p]
     return grundform  + sonderzeichen_dict[g][n] + esse_form_str
 
-print(konjugieren([],[],[],[],[],[],frage))
+print(json.dumps(konjugieren(["indikativ"],["aktiv"],["präsens",],[],["1."],["mänlich"],"esse"),indent=2))
 
 
 # Tests 
