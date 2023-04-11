@@ -19,9 +19,11 @@ voc_str = file2.read()
 voc = json.loads(voc_str)
 
 
-def übersetzung():
-    for i in range(1,len(voc[frage])-1):
-        print(voc[frage][i])
+def übersetzung(vocabel):
+    übersetzungen = []
+    for i in range(len(voc[vocabel][1])):
+        übersetzungen.append(voc[vocabel][1][i])
+    return übersetzungen
 
 
 def konjugieren(indikativ_konjunktiv : List[str],gennus_verbi : List[str],tempi : List[str],numeri : List[str],personen : List[str],geni : List[str],vocabel : List[str]):
@@ -245,6 +247,7 @@ def a_e_konj_konj_pas_plus(n : str,p : str,g : str,vocabel : str)->str:
     return  grundform  + sonderzeichen_dict[g][n] + esse_form_str
 
 print(json.dumps(konjugieren([],[],[],[],[],[],"tacere"),indent=2))
+print(übersetzung(frage))
 
 
 # Tests 
