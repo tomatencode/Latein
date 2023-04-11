@@ -1,7 +1,7 @@
 {
     "laudare": [
         [
-            "laudao",
+            "laudo",
             "laudavi",
             "laudatum"
         ],
@@ -13,5 +13,30 @@
             "rühmen"
         ],
         "a"
+    ],
+    "vocare": [
+        [
+            "voco",
+            "vocavi",
+            "vocatum"
+        ],
+        [
+            "rufen",
+            "nennen",
+            "bezeichen"
+        ],
+        "a"
+    ],
+    "tacere": [
+        [
+            "taceo",
+            "tacui",
+            "tacitum"
+        ],
+        [
+            "schweigen",
+            "verschweigen"
+        ],
+        "e"
     ]
 }
